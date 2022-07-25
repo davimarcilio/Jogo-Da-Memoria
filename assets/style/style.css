@@ -5,6 +5,11 @@
 }
 body{
     font-family: 'Righteous', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #c7cdd3;
 }
 .card{
 width: 150px;
@@ -59,4 +64,10 @@ font-size: 30px;
     border: none;
     border-radius: 15px;
     margin-top: 15px;
+}
+#gameBoard{
+    max-width: 700px;
+    display: grid;
+    grid-template: 1fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
+    gap: 25px;
 }
