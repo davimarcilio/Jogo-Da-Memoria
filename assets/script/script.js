@@ -1,5 +1,7 @@
-const Front = 'card-front';
-const Back = 'card-back';
+const FRONT = 'card-front';
+const BACK = 'card-back';
+const CARD = 'card';
+const ICON = 'icons';
 let apps = [
     'bootstrap',
     'css',
@@ -10,18 +12,49 @@ let apps = [
     'jquery',
     'mongo',
     'node',
-    'react'
+    'react',
 ];
-StartGame();
 let cards = null;
+StartGame();
 function StartGame() {
      cards = CreateCard(apps);
-     RandomCards(cards)
+     RandomCards(cards);
+     initializeCards(cards);
+    //  RandomCards(cards);
+}
+function initializeCards(cards) {
+    let gameBoard = document.getElementById('gameBoard');
+    cards.forEach(card => {
+        let cardElement = document.createElement('div');
+        cardElement.id = card.id;
+        cardElement.classList.add(CARD);
+        cardElement.dataset.icon = card.icon;
+        CreateCardContent(card, cardElement);
+        cardElement.addEventListener('click', flipCard);
+        gameBoard.appendChild(cardElement);
+    });
+}
+function CreateCardContent(card, cardElement) {
+ createCardFace(FRONT, card, cardElement);
+ createCardFace(BACK, card, cardElement);     
+}
+function createCardFace(face, card, element) {
+    let cardElementFace = document.createElement('div');
+    cardElementFace.classList.add(face);
+    if (face === FRONT) {
+        let iconElement = document.createElement('img');
+        iconElement.classList.add(ICON);
+        iconElement.src = "assets/images/" + card.icon + ".png";
+        cardElementFace.appendChild(iconElement);
+    } else {
+        cardElementFace.innerHTML = '&lt/&gt';
+    }
+      element.appendChild(cardElementFace);
 }
 function RandomCards(cards) {
-   let currentIndex = cards.lenght;
+   let currentIndex = cards.length;
 let randomIndex = 0;
-while (currentIndex !== 0) {
+while (currentIndex != 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
     [cards[randomIndex], cards[currentIndex]] = [cards[currentIndex], cards[randomIndex]];
@@ -29,12 +62,12 @@ while (currentIndex !== 0) {
 }
 function CreateCard(apps) {
     let cards = [];
-    for (const app of apps) {
-        cards.push(CreatePair(app))
-    }    
+    apps.forEach(app => {
+        cards.push(CreatePair(app));
+    })
     return cards.flatMap(pair => pair);
 }
-function CreatePaior(app) {
+function CreatePair(app) {
     return [{
         id: CreateId(app),
         icon: app,
@@ -48,3 +81,7 @@ function CreatePaior(app) {
 function CreateId(app) {
     return app + parseInt(Math.random() * 1000);
 }
+function flipCard() {
+    this.classList.add('flip');
+}
+
