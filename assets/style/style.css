@@ -4,17 +4,27 @@ body{
 .card{
 width: 150px;
 height: 150px;
+position: relative;
+transform-style:preserve-3d;
+transition: transform , .5s;
+
 }
 .card-back, .card-front{
 width: 100%;
+position: absolute;
 height: 100%;
 display: flex;
 justify-content: center;
 align-items: center;
 border-radius: 20px;
 box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.45);
+backface-visibility: hidden;
+}
+.flip{
+    transform: rotateY(180deg);
 }
 .card-front{
+    transform: rotateY(180deg);
 background-color: #101c2c;
 }
 .card-back{
