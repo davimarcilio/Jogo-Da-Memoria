@@ -71,3 +71,9 @@ font-size: 30px;
     grid-template: 1fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
     gap: 25px;
 }
+@media only screen and (max-height: 800px){
+    .card{
+        width: 75px;
+        height: 75px;
+    }
+}
