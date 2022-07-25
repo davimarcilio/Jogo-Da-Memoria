@@ -12,6 +12,21 @@ let apps = [
     'node',
     'react'
 ];
+StartGame();
+let cards = null;
+function StartGame() {
+     cards = CreateCard(apps);
+     RandomCards(cards)
+}
+function RandomCards(cards) {
+   let currentIndex = cards.lenght;
+let randomIndex = 0;
+while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [cards[randomIndex], cards[currentIndex]] = [cards[currentIndex], cards[randomIndex]];
+}
+}
 function CreateCard(apps) {
     let cards = [];
     for (const app of apps) {
@@ -31,5 +46,5 @@ function CreatePaior(app) {
     }]
 }
 function CreateId(app) {
-    return app + parseInt(Math.random * 1000);
+    return app + parseInt(Math.random() * 1000);
 }
