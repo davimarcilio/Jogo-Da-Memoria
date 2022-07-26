@@ -73,7 +73,7 @@ font-size: 30px;
 }
 @media only screen and (max-height: 800px){
     .card{
-        width: 75px;
-        height: 75px;
+        width: 100px;
+        height: 100px;
     }
 }
